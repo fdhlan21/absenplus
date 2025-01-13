@@ -10,6 +10,8 @@ export default function MyPicker({
   onChangeText,
   value = '',  // Pastikan value punya default value
   data = [],
+  colorlabel = colors.black,
+  colorIcon = colors.black,
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(data[0]);  // Default selected item
@@ -29,34 +31,40 @@ export default function MyPicker({
 
   return (
     <>
-      <Text
-        style={{
-          fontFamily: fonts.primary[600],
-          color: colors.primary,
-          marginBottom: 8,
-          marginTop: 10,
-          marginLeft: 10,
-        }}
-      >
-        {label}
-      </Text>
+      {/* Label dengan Icon di sebelah kiri */}
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ paddingLeft: 0 }}>
+          <Icon type="ionicon" name={iconname} color={colorIcon} size={24} />
+        </View>
+        <Text
+          style={{
+            fontFamily: fonts.primary[600],
+            color: colorlabel,
+            marginBottom: 8,
+            marginTop: 10,
+            marginLeft: 10,
+          }}
+        >
+          {label}
+        </Text>
+      </View>
 
+      {/* Picker Container */}
       <TouchableOpacity
         style={styles.pickerContainer}
         onPress={() => setModalVisible(true)}
       >
-        <View style={styles.iconContainer}>
-          <Icon type="ionicon" name={iconname} color={Color.blueGray[300]} size={24} />
-        </View>
+       
         {/* Menampilkan nilai yang dipilih atau teks placeholder */}
         <Text style={styles.selectedText}>
-          {selectedItem ? selectedItem.label : 'Select an option'}
+          {selectedItem ? selectedItem.label : ''}
         </Text>
         <View style={styles.iconContainer}>
           <Icon type="ionicon" name="caret-down-outline" color={Color.blueGray[300]} size={24} />
         </View>
       </TouchableOpacity>
 
+      {/* Modal untuk menampilkan pilihan */}
       <Modal
         transparent={true}
         visible={modalVisible}
@@ -85,9 +93,9 @@ const styles = StyleSheet.create({
   pickerContainer: {
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 5,
     borderColor: Color.blueGray[300],
-    minHeight: 60,  // Atur minimum height supaya cukup untuk teks panjang
+    minHeight: 40,  // Atur minimum height supaya cukup untuk teks panjang
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,

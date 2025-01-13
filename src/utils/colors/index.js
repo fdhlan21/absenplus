@@ -1,5 +1,5 @@
 export const colors = {
-  primary: '#004067',
+  primary: '#00A896',
   secondary: '#2B8AE1',
   tertiary: '#FFC700',
   foourty: '#FFF1A8',
@@ -22,7 +22,9 @@ export const colors = {
   merah: '#B9454A',
   tekscolor: '#793C5A',
   card: '#FFFAC3',
-  coklat: '#895C16'
+  coklat: '#895C16',
+  button:'#FFD66B',
+
 };
 
 export const Color = {

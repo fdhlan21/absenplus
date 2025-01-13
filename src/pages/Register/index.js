@@ -1,215 +1,208 @@
-import { View, Text, ImageBackground, ScrollView, TouchableNativeFeedback } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, ImageBackground, ScrollView, TouchableNativeFeedback, SafeAreaView, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { fonts } from '../../utils'
-import { MyInput } from '../../components'
+import { MyInput, MyPicker } from '../../components'
 import { colors } from '../../utils/colors'
 import { showMessage } from 'react-native-flash-message'
 import axios from 'axios'
+import { Row } from 'react-native-table-component'
+import { Icon } from 'react-native-elements'
+import { storeData } from '../../utils/localStorage'
 
 export default function Register({navigation}) {
-
-    const [data, setData] = useState({
-        nama:'',
+    const [loading, setLoading] = useState(false);
+    const [kirim, setKirim] = useState({
+        perusahaan:'',
+        nama_lengkap:'',
+        nip:'',
         email:'',
         telepon:'',
         alamat:'',
+        divisi:'',
+        jabatan:'',
         password:'',
 
 
     });
+    const [isValid, setIsValid] = useState(true);
 
-    const handleRegister = () => {
-        if (data.nama.length == '' || data.email.length == '' || data.telepon.length == '' || data.alamat.length == '' || data.password.length == '') { 
-            showMessage({
-                type:'danger',
-                backgroundColor:colors.danger,
-                color:colors.white,
-                message:'Semua Field Harus Diisi!',
-                position:'top',
-                style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-                textStyle:{fontFamily:fonts.primary[600]}
-            })
-        } else if (data.nama.length === '') {
-            showMessage({
-                type:'danger',
-                backgroundColor:colors.danger,
-                color:colors.white,
-                message:'Nama Harus Diisi!',
-                position:'top',
-                style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-                textStyle:{fontFamily:fonts.primary[600]}
-        });
-     } else if (data.email.length === '') {
-        showMessage({
+    useEffect(() => {
+        // Cek apakah ada field yang kosong
+        const isFormValid = !Object.keys(kirim).some((key) => kirim[key].length === 0);
+        setIsValid(isFormValid);
+      }, [kirim]);
+    
+      const handleRegister = () => {
+        if (!isValid) {
+          showMessage({
             type:'danger',
+            position:"top",
+            message:"Tolong isi semua field!",
             backgroundColor:colors.danger,
             color:colors.white,
-            message:'Email Harus Diisi!',
-            position:'top',
-            style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-            textStyle:{fontFamily:fonts.primary[600]}
-        });
-     } else if (data.telepon.length === '') {
-        showMessage({
-            type:'danger',
-            backgroundColor:colors.danger,
-            color:colors.white,
-            message:'Telepon Harus Diisi!',
-            position:'top',
-            style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-            textStyle:{fontFamily:fonts.primary[600]}
-        });
-     } else if (data.alamat.length === '') {
-        showMessage({
-            type:'danger',
-            backgroundColor:colors.danger,
-            color:colors.white,
-            message:'Alamat Harus Diisi!',
-            position:'top',
-            style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-            textStyle:{fontFamily:fonts.primary[600]}
-        });
-     } else if (data.password.length === '') {
-        showMessage({
-            type:'danger',
-            backgroundColor:colors.danger,
-            color:colors.white,
-            message:'Password Harus Diisi!',
-            position:'top',
-            style:{borderBottomRightRadius:10, borderBottomLeftRadius:10,},
-            textStyle:{fontFamily:fonts.primary[600]}
-        });
-     } else {
-        console.log('Data yang dikirim: ', data);
-        axios
-        .post('API KEY', data)
-        .then((res) => {
-            if (res.data.status == 'success') {
-                showMessage({
-                    type:'success',
-                    backgroundColor:colors.success,
-                    color:colors.white,
-                    message:'Selamat Anda Berhasil Mendaftar!'
-                });
-                navigation.navigate('Login');
-            } else {
-                showMessage({
-                    type:'danger',
-                    backgroundColor:colors.danger,
-                    color:colors.white,
-                    message:'Akun Sudah Terdaftar!'
-                });
-            }
-        })
-        .catch((err) => {
-            console.error('Error: ', err);
-        });
-     }
-    };
+          })
+          console.log('Tolong isi semua field!');
+        } else {
+            console.log('Form valid, lanjutkan pendaftaran');
+            console.log('Data yang di kirim : ', kirim);
+            setLoading(true);
+          axios
+          .post('API KEY', kirim)
+          .then((res) => {
+            console.log(res.data);
+            setTimeout(() => {
+                setLoading(false);
 
+                if (res.data.status == 200) {
+                    console.log(res.data);
+                    storeData('user');
+                    showMessage({
+                        type:'success',
+                        backgroundColor:colors.success,
+                        position:'top',
+                        color:'white',
+                    });
+                    navigation.replace('Login');
+                } else {
+                    showMessage({
+                        type:"danger",
+                        color:"white",
+                        backgroundColor:colors.danger,
+                        position:"top",
+                        message:"Akun sudah pernah daftar!"
+                    });
+                }
+            }, 1000);
+          })
+          .catch((err) => {
+            console.error("Terjadi error di server : ", err);
+          })
+        }
+      };
+    
+
+  
 
   return (
-    <ImageBackground source={require('../../assets/bgregister.png')} style={{
+    <SafeAreaView style={{
+        flex:1,
+        backgroundColor:colors.primary
+    }}>
+    <View style={{
+        height:'100%'
+    }}>
+
+    <ImageBackground source={require('../../assets/bggradient.png')} style={{
         flex:1,
         width:"100%",
         height:"100%",
     }}>
-      <ScrollView>
+
+    <ScrollView>
         <View style={{
-            padding:10
-        }}>
+                 padding:10,
+                 margin:10,
+               
+                 height:"100%"
+             }}>
+     
+             <View style={{
+                 padding:0,
+                 flexDirection:'row',
+                 justifyContent:"center",
+                 alignItems:"center",
+             }}>
+     
+             <View>
+     
+             <View style={{
+                 padding:0,
+                 flexDirection:'row',
+                 justifyContent:"flex-start",
+                 alignItems:"center"
+             }}>
+         <TouchableNativeFeedback onPress={() => navigation.goBack()}>
+         <Icon type='ionicon' name='chevron-back-outline' color='white' size={30}/>
+         </TouchableNativeFeedback>
 
-        <View style={{
-            marginTop:'60%'
-        }}>
-            <Text style={{
-                fontFamily:fonts.primary[600],
-                fontSize:25,
-                textAlign:'center',
-                color:'white',
-            }}>Daftar</Text>
+         <Text style={{
+            fontFamily:fonts.primary[600],
+            color:colors.white,
+            marginLeft:20,
+            fontSize:15,
+         }}>Register</Text>
+         
+             </View>
+     
+     
+     
+                 <Text style={{
+                     fontFamily:fonts.primary[400],
+                     color:colors.white,
+                     fontSize:12,
+                     marginTop:20,
+                 }}>Silahkan melakukan pendaftaran terlebih dahulu{'\n'}sebelum login ke aplikasi</Text>
 
-            <View style={{
-                padding:10,
-            }}>
+     
+                 <View style={{
+                     marginTop:20
+                 }}>
+     
+                    <MyPicker value={kirim.perusahaan} onChangeText={(x) => setKirim({...kirim, 'perusahaan' : x})} label="Pilih Perusahaan" iconname="menu-outline" colorlabel='white' colorIcon='white'/>
 
-            <MyInput value={data.nama} 
-            label="Nama Lengkap" 
-            colorlabel='white' 
-            placeholder="Isi Nama Lengkap" 
-            onChangeText={(x) => setData({...data, 'nama':x})}
-            />
+                    <MyInput value={kirim.nama_lengkap} onChangeText={(x) => setKirim({...kirim, 'nama_lengkap' : x})} label='Nama Lengkap' iconname='person-outline' colorlabel='white' colorIcon='white'/>
 
-            <MyInput 
-            value={data.email}
-            label="Email" 
-            colorlabel='white' 
-            placeholder="Isi Email"
-            onChangeText={(x) => setData({...data, 'email':x})}
-            />
+                    <MyInput value={kirim.nip} onChangeText={(x) => setKirim({...kirim, 'nip' : x})} label='NIP' iconname='card-outline' colorlabel='white' colorIcon='white'/>
 
-            <MyInput 
-            value={data.telepon}
-            label="Telepon"
-            colorlabel='white' 
-            placeholder="Isi Telepon"
-            onChangeText={(x) => setData({...data, 'telepon':x})}
-            />
+                    <MyInput value={kirim.email} onChangeText={(x) => setKirim({...kirim, 'email' : x})} label='E-mail' iconname='mail-outline' colorlabel='white' colorIcon='white'/>
 
-            <MyInput 
-            value={data.alamat}
-            label="Alamat Lengkap" 
-            colorlabel='white'
-            placeholder="Isi Alamat Lengkap"
-            onChangeText={(x) => setData({...data, 'alamat':x})}
-             />
+                    <MyInput value={kirim.telepon} onChangeText={(x) => setKirim({...kirim, 'telepon' : x})} label='Telepon' iconname='call-outline' colorlabel='white' colorIcon='white'/>
 
-            <MyInput
-            value={data.password}
-             label="Kata Sandi" 
-             colorlabel='white' 
-             placeholder="Isi Kata Sandi" 
-             secureTextEntry={true}
-            onChangeText={(x) => setData({...data, 'password':x})}
-             />
+                    <MyInput value={kirim.alamat} onChangeText={(x) => setKirim({...kirim, 'alamat': x})} label='Alamat' iconname='map-outline' colorlabel='white' colorIcon='white'/>
 
+                    <MyInput value={kirim.divisi} onChangeText={(x) => setKirim({...kirim, 'divisi': x})} label='Divisi' iconname='bookmark-outline' colorlabel='white' colorIcon='white'/>
 
-            <View>
-                <TouchableNativeFeedback onPress={handleRegister}>
-                    <View style={{
-                        padding:10,
-                        backgroundColor:colors.secondary,
-                        borderRadius:30,
-                        marginTop:20,
+                    <MyInput  value={kirim.jabatan} onChangeText={(x) => setKirim({...kirim, 'jabatan': x})} label='Jabatan' iconname='ribbon-outline' colorlabel='white' colorIcon='white'/>
 
-                    }}>
-                        <Text style={{
-                            fontFamily:fonts.primary[600],
-                            color:colors.white,
-                            textAlign:'center',
-
-                        }}>Daftar</Text>
-                    </View>
-                </TouchableNativeFeedback>
-
-                
-                                    <TouchableNativeFeedback onPress={() => navigation.navigate('Login')}>
-                                        <Text style={{
-                                            fontFamily:fonts.primary[500],
-                                            color:'white',
-                                            textAlign:'center',
-                                            marginTop:10,
-                                            fontSize:12,
-                                        }}>Sudah memiliki akun? Silakan <Text style={{
-                                            fontFamily:fonts.primary[600],
-                                        }}>Masuk</Text></Text>
-                                    </TouchableNativeFeedback>
-            </View>
-            </View>
-        </View>
-
-        </View>
-      </ScrollView>
+                    <MyInput  value={kirim.password} onChangeText={(x) => setKirim({...kirim, 'password': x})} label='Password' iconname='key-outline' colorlabel='white' colorIcon='white'/>
+                 </View>
+     
+                 <View style={{
+                     marginTop:50
+                 }}>
+                     <TouchableNativeFeedback onPress={handleRegister}>
+                         <View style={{
+                             backgroundColor:colors.button,
+                             padding:10,
+                             flexDirection:'row',
+                             justifyContent:"center",
+                             alignItems:"center",
+                             borderRadius:5
+                         }}>
+     
+                         <Text style={{
+                             fontFamily:fonts.primary[600],
+                             fontSize:12,
+                             color:colors.black,
+                             marginRight:10
+                         }}>Login</Text>
+     
+                         <Icon type='ionicon' name='log-in-outline' size={20}/>
+     
+                         </View>
+                     </TouchableNativeFeedback>
+                 </View>
+     
+             </View>
+     
+             </View>
+     
+             </View>
+    </ScrollView>
+     
     </ImageBackground>
+    </View>
+    </SafeAreaView>
+   
   )
 }

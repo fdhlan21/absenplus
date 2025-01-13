@@ -13,7 +13,7 @@ import DonwnloadBrosur from './Menu/downloadbrosur';
 import BuktiPengeluaran from './Menu/buktipengeluaran';
 import TambahBuktiPengeluaran from './Menu/tambahbuktipengeluaran';
 import HasilBuatPenawaran from './Menu/hasilbuatpenawaran';
-
+import LoginOrRegister from './Login/loginorregister';
 
 
 
@@ -35,6 +35,7 @@ export {
   BuktiPengeluaran,
   TambahBuktiPengeluaran,
   HasilBuatPenawaran,
+  LoginOrRegister,
 
 
 

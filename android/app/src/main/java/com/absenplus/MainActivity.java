@@ -1,4 +1,4 @@
-package com.wksdealmaker;
+package com.absenplus;
 
 import com.facebook.react.ReactActivity;
 

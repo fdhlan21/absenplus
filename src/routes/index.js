@@ -68,6 +68,7 @@ import {
   BuktiPengeluaran,
   TambahBuktiPengeluaran,
   HasilBuatPenawaran,
+  LoginOrRegister,
 
 
 
@@ -119,8 +120,8 @@ export default function Router() {
 
 
 <Stack.Screen
-        name="BuatPenawaran"
-        component={BuatPenawaran}
+        name="LoginOrRegister"
+        component={LoginOrRegister}
         options={{
           headerShown: false,
 

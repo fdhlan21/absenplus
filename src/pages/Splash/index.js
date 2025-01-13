@@ -1,128 +1,125 @@
 import React, { useEffect } from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  Image,
   Animated,
   ImageBackground,
   SafeAreaView,
 } from 'react-native';
-import { MyButton, MyGap } from '../../components';
-import { MyDimensi, colors, fonts, windowHeight, windowWidth } from '../../utils';
-import { MYAPP, getData } from '../../utils/localStorage';
+
+import { colors, windowHeight } from '../../utils';
 
 export default function Splash({ navigation }) {
-  const img = new Animated.Value(0.5);
-  const textScale = new Animated.Value(0.5);
-  const textOpacity = new Animated.Value(0);
+  const circleScale = new Animated.Value(0); // Untuk animasi lingkaran
+  const circleOpacity = new Animated.Value(1); // Untuk memudar lingkaran
+  const overlayOpacity = new Animated.Value(1); // Untuk memudar overlay putih
+  const backgroundOpacity = new Animated.Value(0); // Untuk memunculkan background
 
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(img, {
+    // Urutan animasi: Lingkaran membesar, lingkaran & overlay memudar, lalu background muncul
+    Animated.sequence([
+      Animated.timing(circleScale, {
         toValue: 1,
-        duration: 750,
+        duration: 1000,
         useNativeDriver: true,
       }),
-      Animated.timing(textScale, {
+      Animated.parallel([
+        Animated.timing(circleOpacity, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(overlayOpacity, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.timing(backgroundOpacity, {
         toValue: 1,
-        duration: 750,
+        duration: 200,
         useNativeDriver: true,
       }),
-      Animated.timing(textOpacity, {
-        toValue: 1,
-        duration: 750,
-        useNativeDriver: true,
-      })
-    ]).start();
-
-  
-    setTimeout(() => {
-      navigation.replace("Login");
-    }, 1200);
-  }, []);
+    ]).start(() => {
+      // Tunggu sebentar sebelum navigasi ke halaman login
+      setTimeout(() => navigation.replace('LoginOrRegister'), 2500);
+    });
+  }, [navigation]);
 
   return (
-    <SafeAreaView style={{
-      flex: 1,
-      padding: 0,
-      backgroundColor: colors.white,
-      justifyContent: 'center',
-      position: 'relative'
-    }}>
-
-      <ImageBackground source={require('../../assets/bgimg.png')} style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.primary,
-        width: '100%',
-        height: '100%'
-      }}>
-
-        <Animated.Image
-          source={require('../../assets/logosplash.png')}
-          resizeMode="contain"
-          style={{
-            transform: [{ scale: img }],
-            width: windowWidth / 1.5,
-            height: windowWidth / 1.5,  
-            marginTop:'30%'
-
-          }}
+    <SafeAreaView style={styles.container}>
+      {/* Background gambar */}
+      <Animated.View
+        style={[
+          styles.backgroundContainer,
+          { opacity: backgroundOpacity }, // Efek fade untuk background
+        ]}
+      >
+        <ImageBackground
+          source={require('../../assets/bgsplasj.png')}
+          style={styles.background}
         />
-      
-      <View style={{
-        marginTop:'20%',
-        alignItems:"center"
-      }}>
-      <Animated.Text Style={{
-          opacity: textOpacity,
-          transform: [{ scale: textScale }],
-          textAlign: 'center',
-          color: colors.white,
-          fontFamily: fonts.primary[600],
-          fontSize: 20,
-      }}>
-          <Text style={{
-            fontFamily:fonts.primary[600],
-            fontSize: 20,
-            color:colors.white,
-         
-          }}>PT Wali Karunia Sejahtera</Text>
-        </Animated.Text>
+      </Animated.View>
 
-          <Animated.Text style={{
-            opacity:textOpacity,
-            transform: [{ scale: textScale }],
-            textAlign:"center",
-            marginTop:10,
-            paddingHorizontal:20,
-            color:colors.white,
-            fontFamily:fonts.primary[400],
-            fontSize:12,
-            lineHeight:20,
-            textAlign:"center"
-          }}>
-            <Text style={{
-              fontFamily:fonts.primary[500],
-              color:colors.white,
-              fontSize:12,
-              
-            }}>
-            Lembah Cinere Indah, Jalan Kelapa Sawit Blok E No. 130 Cinere,
-            Depok Indonesia 16514
-            </Text>
-          </Animated.Text>
-      </View>
-          
-        <ActivityIndicator style={{marginTop:50}} color={colors.primary} size="small" />
+      {/* Overlay putih */}
+      <Animated.View
+        style={[
+          styles.overlay,
+          {
+            opacity: overlayOpacity, // Memudar bersama dengan lingkaran
+          },
+        ]}
+      />
 
-      </ImageBackground>
-
+      {/* Lingkaran animasi */}
+      <Animated.View
+        style={[
+          styles.circle,
+          {
+            transform: [
+              {
+                scale: circleScale.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 15], // Membesar hingga 15x ukuran awal
+                }),
+              },
+            ],
+            opacity: circleOpacity, // Efek memudar lingkaran
+          },
+        ]}
+      />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backgroundContainer: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 0, // Background di lapisan paling bawah
+  },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: colors.white,
+    zIndex: 1, // Overlay di atas background
+  },
+  circle: {
+    position: 'absolute',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#00A896',
+    zIndex: 2, // Lingkaran di atas overlay
+    top: windowHeight / 2 - 50, // Pusatkan secara vertikal
+    alignSelf: 'center',
+  },
+});
