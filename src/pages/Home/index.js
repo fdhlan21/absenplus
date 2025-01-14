@@ -13,6 +13,7 @@ import {
 import { getData } from '../../utils/localStorage';
 import { colors, fonts, windowWidth } from '../../utils';
 import { Icon } from 'react-native-elements';
+import { CoroselItem, HomeMenu } from '../../components';
 
 const images = [
   { id: 1, src: require('../../assets/korosel-1.png'), label: 'Gambar 1' },
@@ -162,201 +163,20 @@ export default function Home({ navigation, route }) {
               fontSize:10,
             }}>PT. Zavalabs Teknologi Indonesia</Text>
           </View>
-
           </View>
-
-
-          {/* COROSEL VIEW */}
-          <ScrollView 
-          horizontal={true} 
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          onScroll={handleScroll}
-          scrollEventThrottle={16}
-          >
-               {/* 1 */}
-          <View style={{
-            padding:10,
-            flexDirection:"row",
-            justifyContent:'center',
-            alignItems:"center",
-            maxWidth:310,
-            width:310
-          }}>
-
-          <View style={{
-            padding:10,
-            backgroundColor:colors.primary,
-            borderRadius:10,
-            maxWidth:310,
-            width:310
-          }}>
-          
-          {/* DATE & TIME */}
-          <View style={{
-            flexDirection:'row',
-            justifyContent:"space-between",
-            alignItems:'center',
-          }}>
-
-          {/* TANGGAL */}
-          <View>
-            <Text style={{
-              fontFamily:fonts.primary[600],
-              color:colors.white,
-            }}>{formatTanggal()}</Text>
-          </View>
-
-          {/* TIME */}
-          <View style={{
-            flexDirection:'row',
-            justifyContent:"center",
-            alignItems:"center"
-          }}>
-
-          <Icon style={{
-            marginRight:10
-          }} type='ionicon' name='time' size={20} color='white'/>
-            <Text style={{
-              fontFamily:fonts.primary[500],
-              color:colors.white,
-              fontSize:12
-            }}>08.00 - 17.00</Text>
-          </View>
-
-          </View>
-
-          {/* MASUK DAN PULANG */}
-
-          <View style={{
-            flexDirection:'row',
-            justifyContent:'space-between',
-            alignItems:'center',
-            marginTop:10
-
-          }}>
-
-          <View style={{
-            padding:10,
-            backgroundColor:colors.white,
-            borderRadius:10,
-            flexDirection:'row',
-            alignItems:'center',
-            justifyContent:'center',
-            maxWidth:135,
-            width:135,
-            alignSelf:'center',
-            height:48
-          }}>
-
-          <Image style={{
-            width:28,
-            height:14,
-            right:10
-       
-          }} source={require('../../assets/masuk_icon.png')}/>
-
-          {/* jam masuk */}
-
-          <View style={{marginRight:10}}>
-            <Text style={{
-              fontFamily:fonts.primary[500],
-              fontSize:12,
-
-            }}>Masuk</Text>
-
-             <Text style={{
-              fontFamily:fonts.primary[500],
-              fontSize:12,
-              color:colors.success,
-            }}>07:45 <Text style={{color:colors.black}}>WIB</Text></Text>
-          </View>
-
-          </View>
-
-      
-          <View style={{
-            padding:10,
-            backgroundColor:colors.white,
-            borderRadius:10,
-            flexDirection:'row',
-            alignItems:'center',
-            justifyContent:'center',
-            maxWidth:135,
-            width:135,
-            alignSelf:'center',
-            height:48
-          }}>
-
-          <Image style={{
-            width:28,
-            height:14,
-            right:10
-       
-          }} source={require('../../assets/pulang_icon.png')}/>
-
-          {/* jam masuk */}
-
-          <View style={{marginRight:10}}>
-            <Text style={{
-              fontFamily:fonts.primary[500],
-              fontSize:12,
-
-            }}>Pulang</Text>
-
-             <Text style={{
-              fontFamily:fonts.primary[500],
-              fontSize:12,
-              color:colors.danger,
-            }}>17:03 <Text style={{color:colors.black}}>WIB</Text></Text>
-          </View>
-          </View>
-          </View>
-          </View>
-          </View>
-
-          {/* 2 */}
-          <View style={{
-            padding:10,
-            flexDirection:"row",
-            justifyContent:'center',
-            alignItems:"center",
-            backgroundColor:colors.white,
-            borderWidth:0.5,
-            maxWidth:310,
-            width:310,
-            borderRadius:10,
-            
-          }}>
-          <View style={{
-          flexDirection:'row',
-          justifyContent:"space-between",
-          alignItems:"center",
-          }}>
-
-          </View>
-          
-          </View>
-          </ScrollView>
-
-          <View style={{
-            flexDirection:"row",
-            marginTop:10,
-            justifyContent:"center",
-            alignItems:"center"
-          }}>
-
-          {[0,1].map((_, index) => (
-            <View style={[styles.indicator, currentIndex === index && styles.activeIndicator ]} key={index}>
-
-            </View>
-          ))}
-
-          </View>
-
-     
-       
         </View>
+
+          
+          {/* COROSEL ITEM */}
+          <View style={{marginTop:10}}>
+          <CoroselItem/>
+          </View>
+
+        {/* MENU */}
+          <View>
+            <HomeMenu/>
+          </View>
+       
      
           
         </View>

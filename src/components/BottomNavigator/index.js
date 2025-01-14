@@ -1,127 +1,227 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Text,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Color, colors } from '../../utils/colors';
-import { useState, useEffect } from 'react';
-import { getData, urlAPI } from '../../utils/localStorage';
-import axios from 'axios';
-import { useIsFocused } from '@react-navigation/native';
 import { fonts } from '../../utils';
 
 export default function BottomNavigator({ state, descriptors, navigation }) {
-  const focusedOptions = descriptors[state.routes[state.index].key].options;
-  const [cart, setCart] = useState(0);
-  const isFocused = useIsFocused();
-
-  useEffect(() => {
-    // Uncomment and implement cart fetching logic if needed
-    // if (isFocused) {
-    //   getData('user').then(users => {
-    //     axios.post(urlAPI + '/1_cart.php', {
-    //       fid_user: users.id
-    //     }).then(res => {
-    //       setCart(parseFloat(res.data));
-    //     });
-    //   });
-    // }
-  }, [isFocused]);
-
-  if (focusedOptions.tabBarVisible === false) {
-    return null;
-  }
-
   return (
-    <View
-      style={{
-        backgroundColor: colors.primary,
-        flexDirection: 'row',
-        borderTopWidth: 1,
-        borderTopColor: Color.blueGray[100],
-        height: 65,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-      }}
-    >
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+    <View style={styles.container}>
+      <View style={styles.groupLeft}>
+        {/* Home & Aset dalam satu view */}
+        {['Home', 'Aset'].map((tabName, index) => {
+          const route = state.routes.find((r) => r.name === tabName);
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
 
-        const isFocused = state.index === index;
+          const isFocused = state.index === state.routes.indexOf(route);
 
-        const onPress = () => {
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          const iconName =
+            label === 'Home'
+              ? isFocused
+                ? 'home' // Ikon penuh saat aktif
+                : 'home-outline' // Ikon outline saat tidak aktif
+              : label === 'Aset'
+              ? isFocused
+                ? 'briefcase'
+                : 'briefcase-outline'
+              : '';
+
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={onPress}
+              style={styles.tabButton}
+            >
+              <Icon
+                name={iconName}
+                type="ionicon"
+                size={25}
+                color={isFocused ? colors.white : colors.secondary}
+              />
+              <Text
+                style={[styles.tabLabel, { color: isFocused ? colors.white : colors.secondary }]}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+
+      {/* Absen button tetap di tengah */}
+      <TouchableOpacity
+        onPress={() => {
+          const route = state.routes.find((r) => r.name === 'Absen');
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
           });
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, { key: 0 });
+          if (!event.defaultPrevented) {
+            navigation.navigate(route.name);
           }
-        };
+        }}
+        style={styles.absenButton}
+      >
+        <View style={styles.absenIconContainer}>
+          <Icon
+            name="scan-circle-outline"
+            type="ionicon"
+            size={40}
+            color={colors.white}
+            style={{left:1}}
+          />
+        </View>
+        <Text style={styles.absenLabel}>Absen</Text>
+      </TouchableOpacity>
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
+      <View style={styles.groupRight}>
+        {/* Riwayat & Profile dalam satu view */}
+        {['Riwayat', 'Profile'].map((tabName, index) => {
+          const route = state.routes.find((r) => r.name === tabName);
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
 
-        let iconName;
-        switch (label) {
-          case 'Home':
-            iconName = isFocused ? 'home' : 'home-outline';
-            break;
-          case 'Profile':
-            iconName = isFocused ? 'person' : 'person-outline';
-            break;
-          default:
-            iconName = 'help-circle-outline';
-            break;
-        }
+          const isFocused = state.index === state.routes.indexOf(route);
 
-        return (
-          <TouchableOpacity
-            key={index}
-            accessibilityRole="button"
-            accessibilityStates={isFocused ? ['selected'] : []}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 65,
-              }}
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          const iconName =
+            label === 'Riwayat'
+              ? isFocused
+                ? 'time'
+                : 'time-outline' // Gunakan outline saat tidak aktif
+              : label === 'Profile'
+              ? isFocused
+                ? 'person'
+                : 'person-outline' // Gunakan outline saat tidak aktif
+              : '';
+
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={onPress}
+              style={styles.tabButton}
             >
               <Icon
-                type="ionicon"
                 name={iconName}
-                size={35}
+                type="ionicon"
+                size={25}
                 color={isFocused ? colors.white : colors.secondary}
               />
-             
-            </View>
-          </TouchableOpacity>
-        );
-      })}
+              <Text
+                style={[styles.tabLabel, { color: isFocused ? colors.white : colors.secondary }]}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: colors.primary,
+    height: 70,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'space-between', // Agar semua elemen bisa diatur ke tengah
+    position: 'relative',
+    paddingHorizontal: 0,
+  },
+  groupLeft: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start', // Menempatkan ke kiri
+    flex: 1,
+    paddingLeft: 20, // Memberikan padding di kiri
+    alignItems: 'center',
+  },
+  groupRight: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end', // Menempatkan ke kanan
+    flex: 1,
+    paddingRight: 20, // Memberikan padding di kanan
+    alignItems: 'center',
+  },
+  tabButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 15, // Jarak antar ikon
+  },
+  tabLabel: {
+    fontSize: 10,
+    marginTop: 5,
+    fontFamily: fonts.primary[600],
+  },
+  absenButton: {
+    position: 'absolute',
+    top: -50,
+    left: '55%', // Menjaga agar tetap di tengah
+    marginLeft: -35, // Setengah dari ukuran lebar tombol
+    alignItems: 'center',
+  },
+  absenIconContainer: {
+    backgroundColor: '#F0AD4E',
+    width: 70,
+    height: 70,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 5,
+    borderColor: colors.white,
+    left: -24,
+    marginTop: 17.5,
+  },
+  absenLabel: {
+    marginTop: 5,
+    color: colors.white,
+    fontSize: 10,
+    left: -25,
+    fontFamily: fonts.primary[600],
+  },
+});

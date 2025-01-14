@@ -14,7 +14,9 @@ import BuktiPengeluaran from './Menu/buktipengeluaran';
 import TambahBuktiPengeluaran from './Menu/tambahbuktipengeluaran';
 import HasilBuatPenawaran from './Menu/hasilbuatpenawaran';
 import LoginOrRegister from './Login/loginorregister';
-
+import Asset from './Aset';
+import Riwayat from './Riwayat';
+import Absen from './Absen';
 
 
 
@@ -36,7 +38,9 @@ export {
   TambahBuktiPengeluaran,
   HasilBuatPenawaran,
   LoginOrRegister,
-
+  Asset,
+  Riwayat,
+  Absen,
 
 
 

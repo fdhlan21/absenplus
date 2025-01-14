@@ -14,10 +14,14 @@ import MyImageUpload from './MyImageUpload';
 import MyTimePicker from './MyTimePicker';
 import MyFileUploader from './MyFileUpload';
 import FileUpload from './FileUpload';
+import CoroselItem from './CoroselHome';
+import HomeMenu from './HomeMenu';
+
+
 
 
 
 
 export { MyGap, MyButton, MyInput, MyHeader, MyPicker, MyCalendar, BottomNavigator, 
     MyRadio,MyInputSecond,MyButtonSecond ,MyCalendarSecond, MyInputLogin,MyImageUpload,
-     MyTimePicker,MyFileUploader, FileUpload};
+     MyTimePicker,MyFileUploader, FileUpload,CoroselItem,HomeMenu};

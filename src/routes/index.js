@@ -69,6 +69,8 @@ import {
   TambahBuktiPengeluaran,
   HasilBuatPenawaran,
   LoginOrRegister,
+  Asset,
+  Absen,
 
 
 
@@ -88,7 +90,10 @@ const MainApp = () => {
   return (
     <Tab.Navigator initialRouteName='Produk' tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Aset" component={Asset} />
+      <Tab.Screen name="Riwayat" component={Riwayat} />
       <Tab.Screen name="Profile" component={Account} />
+      <Tab.Screen name="Absen" component={Absen} />
 
     </Tab.Navigator>
   );
@@ -129,8 +134,8 @@ export default function Router() {
       />
 
 <Stack.Screen
-        name="TambahPenawaran"
-        component={TambahPenawaran}
+        name="Asset"
+        component={MainApp}
         options={{
           headerShown: false,
 
@@ -139,8 +144,8 @@ export default function Router() {
 
 
 <Stack.Screen
-        name="DownloadBrosur"
-        component={DonwnloadBrosur}
+        name="Riwayat"
+        component={MainApp}
         options={{
           headerShown: false,
 
@@ -148,8 +153,8 @@ export default function Router() {
       />
 
 <Stack.Screen
-        name="BuktiPengeluaran"
-        component={BuktiPengeluaran}
+        name="Absen"
+        component={MainApp}
         options={{
           headerShown: false,
 

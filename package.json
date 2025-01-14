@@ -17,12 +17,14 @@
     "@react-native-picker/picker": "^1.16.8",
     "@react-native/normalize-color": "^2.0.0",
     "@react-navigation/bottom-tabs": "^5.11.2",
-    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/native": "^5.9.8",
     "@react-navigation/stack": "^5.12.8",
     "axios": "^0.21.4",
+    "install": "^0.13.0",
     "intl": "^1.2.5",
     "mask-js": "^2.1.0",
     "moment": "^2.29.4",
+    "npm": "^11.0.0",
     "react": "16.13.1",
     "react-native": "0.65.1",
     "react-native-animated-pagination-dots": "^0.1.72",
@@ -69,6 +71,7 @@
     "react-native-view-shot": "^3.5.0",
     "react-native-webview": "^11.15.0",
     "react-native-youtube-iframe": "^2.2.2",
+    "react-navigation": "^5.0.0",
     "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
