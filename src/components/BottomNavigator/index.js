@@ -89,12 +89,13 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
         style={styles.absenButton}
       >
         <View style={styles.absenIconContainer}>
+       
           <Icon
-            name="scan-circle-outline"
+            name="scan-outline"
             type="ionicon"
             size={40}
             color={colors.white}
-            style={{left:1}}
+            style={{left:1,}}
           />
         </View>
         <Text style={styles.absenLabel}>Absen</Text>
@@ -146,7 +147,7 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
               <Icon
                 name={iconName}
                 type="ionicon"
-                size={25}
+                size={23}
                 color={isFocused ? colors.white : colors.secondary}
               />
               <Text
@@ -167,8 +168,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.primary,
     height: 70,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     alignItems: 'center',
     justifyContent: 'space-between', // Agar semua elemen bisa diatur ke tengah
     position: 'relative',
@@ -216,6 +217,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     left: -24,
     marginTop: 17.5,
+    flexDirection:"row"
   },
   absenLabel: {
     marginTop: 5,

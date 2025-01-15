@@ -17,7 +17,8 @@ import LoginOrRegister from './Login/loginorregister';
 import Asset from './Aset';
 import Riwayat from './Riwayat';
 import Absen from './Absen';
-
+import Lembur from './Lembur';
+import TambahLembur from './Lembur/add';
 
 
 
@@ -41,7 +42,8 @@ export {
   Asset,
   Riwayat,
   Absen,
-
+  Lembur,
+TambahLembur,
 
 
   

@@ -2,7 +2,7 @@ import { View, Text, TouchableNativeFeedback, Image } from 'react-native'
 import React from 'react'
 import { colors, fonts } from '../../utils'
 
-export default function HomeMenu() {
+export default function HomeMenu({navigation}) {
   return (
     <View>
    <View style={{
@@ -22,7 +22,7 @@ export default function HomeMenu() {
       
         }}>
 
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() =>  navigation.navigate("Lembur")}>
         <View style={{
           padding:10,
           backgroundColor:colors.secondary,

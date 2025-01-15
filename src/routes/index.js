@@ -71,6 +71,8 @@ import {
   LoginOrRegister,
   Asset,
   Absen,
+  Lembur,
+  TambahLembur,
 
 
 
@@ -101,7 +103,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='MainApp'>
+    <Stack.Navigator initialRouteName='TambahLembur'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -163,8 +165,8 @@ export default function Router() {
 
       
 <Stack.Screen
-        name="TambahBuktiPengeluaran"
-        component={TambahBuktiPengeluaran}
+        name="Lembur"
+        component={Lembur}
         options={{
           headerShown: false,
 
@@ -172,8 +174,8 @@ export default function Router() {
       />
 
 <Stack.Screen
-        name="HasilBuatPenawaran"
-        component={HasilBuatPenawaran}
+        name="TambahLembur"
+        component={TambahLembur}
         options={{
           headerShown: false,
 

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-nati
 
 import { colors, fonts } from '../../utils';
 import { color } from 'react-native-reanimated';
+import { Icon } from 'react-native-elements';
 
 function Page1() {
   return (
@@ -72,7 +73,59 @@ function Page1() {
 function Page2() {
   return (
     <View style={styles.page}>
-      <Text>Halaman 2</Text>
+         <View style={{
+        padding:10,
+      }}>
+
+      <View style={{
+        borderWidth:1,
+        borderRadius:10,
+        padding:10,
+      }}>
+
+      {/* TANGGAL DAN INFO */}
+      <View style={{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:'center',
+      }}>
+
+      {/* Keterangan dan Tanggal */}
+     <View>
+     <Text style={{fontFamily:fonts.primary[600], fontSize:12,}}>Izin</Text>
+     <Text style={{fontFamily:fonts.primary[300], fontSize:10,}}>31 Des, 2024-14 Jan, 2025</Text>
+     </View>
+      
+      {/* INFO */}
+      <View style={{padding:10, backgroundColor:'#FFF3E1', borderRadius:10}}>
+        <Text style={{fontFamily:fonts.primary[400], fontSize:10, color:colors.foourty}}>Menunggu Persetujuan</Text>
+      </View>
+      </View>
+
+      {/* MASUK, PULANG, LAMA DI KANTOR */}
+      <View style={{
+        flexDirection:"row",
+        justifyContent:'flex-start',
+        alignItems:"center",
+        marginTop:20
+      }}>
+
+      {/* WAKTU IZIN / SAKIT */}
+      <View style={{
+        flexDirection:'row',
+        justifyContent:"flex-start",
+        alignItems:"center",
+        
+        
+      }}>
+        <Icon type='ionicon' name='time-outline'/>
+        <Text style={{fontFamily:fonts.primary[499], fontSize:15, textAlign:"center", marginHorizontal:10}}>2 Hari</Text>
+      </View>
+      </View>
+
+      </View>
+
+      </View>
     </View>
   );
 }
@@ -80,7 +133,59 @@ function Page2() {
 function Page3() {
   return (
     <View style={styles.page}>
-      <Text>Halaman 3</Text>
+         <View style={{
+        padding:10,
+      }}>
+
+      <View style={{
+        borderWidth:1,
+        borderRadius:10,
+        padding:10,
+      }}>
+
+      {/* TANGGAL DAN INFO */}
+      <View style={{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:'center',
+      }}>
+
+      {/* Keterangan dan Tanggal */}
+     <View>
+     <Text style={{fontFamily:fonts.primary[600], fontSize:12,}}>Izin</Text>
+     <Text style={{fontFamily:fonts.primary[300], fontSize:10,}}>31 Des, 2024-14 Jan, 2025</Text>
+     </View>
+      
+      {/* INFO */}
+      <View style={{padding:10, backgroundColor:'#FFF3E1', borderRadius:10}}>
+        <Text style={{fontFamily:fonts.primary[400], fontSize:10, color:colors.foourty}}>Menunggu Persetujuan</Text>
+      </View>
+      </View>
+
+      {/* MASUK, PULANG, LAMA DI KANTOR */}
+      <View style={{
+        flexDirection:"row",
+        justifyContent:'flex-start',
+        alignItems:"center",
+        marginTop:20
+      }}>
+
+      {/* WAKTU IZIN / SAKIT */}
+      <View style={{
+        flexDirection:'row',
+        justifyContent:"flex-start",
+        alignItems:"center",
+        
+        
+      }}>
+        <Icon type='ionicon' name='time-outline'/>
+        <Text style={{fontFamily:fonts.primary[499], fontSize:15, textAlign:"center", marginHorizontal:10}}>2 Hari</Text>
+      </View>
+      </View>
+
+      </View>
+
+      </View>
     </View>
   );
 }
@@ -88,7 +193,53 @@ function Page3() {
 function Page4() {
   return (
     <View style={styles.page}>
-      <Text>Halaman 4</Text>
+        <View style={{
+        padding:10,
+      }}>
+
+      <View style={{
+        borderWidth:1,
+        borderRadius:10,
+        padding:10,
+      }}>
+
+      {/* TANGGAL DAN INFO */}
+      <View style={{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:'center',
+      }}>
+
+      {/* Keterangan dan Tanggal */}
+     <View>
+     <Text style={{fontFamily:fonts.primary[300], fontSize:10,}}>13 Januari, 2025</Text>
+     <Text style={{fontFamily:fonts.primary[500], fontSize:12,}}>Transportasi</Text>
+     </View>
+      
+      {/* INFO */}
+      <View style={{padding:10, backgroundColor:'#FFF3E1', borderRadius:10}}>
+        <Text style={{fontFamily:fonts.primary[400], fontSize:10, color:colors.foourty}}>Menunggu Persetujuan</Text>
+      </View>
+      </View>
+
+      {/* JUMLAH */}
+      <View style={{
+        marginTop:20
+      }}>
+        <Text style={{fontFamily:fonts.primary[600], }}>$120.00</Text>
+      </View>
+
+      {/* Ketenrangan */}
+      <View style={{
+        marginTop:10
+      }}>
+    <Text style={{fontFamily:fonts.primary[300], }}>Taksi untuk meeting client</Text>
+      
+      </View>
+
+      </View>
+
+      </View>
     </View>
   );
 }

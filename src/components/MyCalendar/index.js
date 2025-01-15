@@ -23,6 +23,7 @@ export default function MyCalendar({
   textColor = colors.black,
   styleLabel,
   colorIcon = colors.primary,
+  fontFamily = fonts.primary[600],
   data = [],
 }) {
   return (
@@ -34,10 +35,10 @@ export default function MyCalendar({
 
       <Text
         style={{
-          fontFamily:fonts.primary[600],
-          color: colors.primary,
+          fontFamily:fontFamily,
+          color: textColor,
           marginBottom: 8,
-          marginLeft:10
+          marginLeft:5
         }}>
         {label}
       </Text>
@@ -46,7 +47,7 @@ export default function MyCalendar({
       <View style={{
         backgroundColor: colors.white,
         borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 10,
         borderColor: Color.blueGray[300]
       }}>
 

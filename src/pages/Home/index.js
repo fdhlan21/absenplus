@@ -174,7 +174,7 @@ export default function Home({ navigation, route }) {
 
         {/* MENU */}
           <View>
-            <HomeMenu/>
+            <HomeMenu navigation={navigation}/>
           </View>
        
      
