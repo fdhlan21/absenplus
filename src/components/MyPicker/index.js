@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flex: 1,
+    left:7
   },
   selectedText: {
     flex: 8,

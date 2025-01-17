@@ -36,10 +36,10 @@ export default function TambahLembur({ navigation }) {
     }
   };
 
-  const handleTimeChange = (event, selectedTime, isStart) => {
+const handleTimeChange = (event, selectedTime, isStart) => {
     if (event.type === 'dismissed') {
-      isStart ? setShowStartPicker(false) : setShowEndPicker(false);
-      return;
+        isStart ? setShowStartPicker(false) : setShowEndPicker(false);
+        return;
     }
 
     const currentTime = selectedTime || new Date();
@@ -48,13 +48,21 @@ export default function TambahLembur({ navigation }) {
     const formattedTime = `${hours}:${minutes}`;
 
     if (isStart) {
-      setStartTime(formattedTime);
-      setShowStartPicker(false);
+        setShowStartPicker(false);
+        setStartTime(formattedTime);
+        setKirim(prevState => ({
+            ...prevState,
+            waktu_mulai: formattedTime,
+        }));
     } else {
-      setEndTime(formattedTime);
-      setShowEndPicker(false);
+        setShowEndPicker(false);
+        setEndTime(formattedTime);
+        setKirim(prevState => ({
+            ...prevState,
+            waktu_selesai: formattedTime,
+        }));
     }
-  };
+};
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
@@ -95,7 +103,7 @@ export default function TambahLembur({ navigation }) {
               >
                 <Icon type="ionicon" name="time-outline" size={20} color={colors.primary} />
                 <Text style={{ fontFamily: fonts.primary[400], fontSize: 10, marginLeft: 5 }}>
-                  {startTime ? `Waktu Mulai: ${startTime}` : 'Waktu Mulai'}
+                {kirim.waktu_mulai ? `Waktu Mulai: ${kirim.waktu_mulai}` : 'Waktu Mulai'}
                 </Text>
               </TouchableOpacity>
 
@@ -115,7 +123,7 @@ export default function TambahLembur({ navigation }) {
               >
                 <Icon type="ionicon" name="time-outline" size={20} color={colors.primary} />
                 <Text style={{ fontFamily: fonts.primary[400], fontSize: 10, marginLeft: 5 }}>
-                  {endTime ? `Waktu Selesai: ${endTime}` : 'Waktu Selesai'}
+                 {kirim.waktu_selesai ? `Waktu Selesai: ${kirim.waktu_selesai}` : 'Waktu Selesai'}
                 </Text>
               </TouchableOpacity>
             </View>

@@ -19,7 +19,13 @@ import Riwayat from './Riwayat';
 import Absen from './Absen';
 import Lembur from './Lembur';
 import TambahLembur from './Lembur/add';
-
+import PengajuanIzi from './Izin';
+import PengajuanCuti from './Cuti';
+import PengajuanReimbursement from './Reimbursement';
+import Kujungan from './Kujungan';
+import Catatan from './Catatan';
+import SlipGaji from './SlipGaji';
+import RekapAbsen from './RekapAbsen';
 
 
 export {
@@ -44,7 +50,13 @@ export {
   Absen,
   Lembur,
 TambahLembur,
-
+PengajuanIzi,
+PengajuanCuti,
+PengajuanReimbursement,
+Kujungan,
+Catatan,
+SlipGaji,
+RekapAbsen,
 
   
 

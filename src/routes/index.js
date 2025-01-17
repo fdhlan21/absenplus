@@ -73,6 +73,13 @@ import {
   Absen,
   Lembur,
   TambahLembur,
+  PengajuanIzi,
+  PengajuanCuti,
+  PengajuanReimbursement,
+  Kujungan,
+  Catatan,
+  SlipGaji,
+  RekapAbsen,
 
 
 
@@ -103,7 +110,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='TambahLembur'>
+    <Stack.Navigator initialRouteName='Catatan'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -192,8 +199,8 @@ export default function Router() {
       />
 
 <Stack.Screen
-        name="CheckHargaStock"
-        component={CheckHargaStock}
+        name="PengajuanIzin"
+        component={PengajuanIzi}
         options={{
           headerShown: false,
 
@@ -211,8 +218,8 @@ export default function Router() {
 
 
       <Stack.Screen
-        name="KalkulatorKompos"
-        component={KalkulatorKompos}
+        name="PengajuanCuti"
+        component={PengajuanCuti}
         options={{
           headerShown: false,
 
@@ -221,8 +228,8 @@ export default function Router() {
 
 
 <Stack.Screen
-        name="Petunjuk"
-        component={Petunjuk}
+        name="PengajuanReimbursement"
+        component={PengajuanReimbursement}
         options={{
           headerShown: false,
 
@@ -230,6 +237,41 @@ export default function Router() {
       />
 
 
+<Stack.Screen
+        name="Kunjungan"
+        component={Kujungan}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="Catatan"
+        component={Catatan}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="SlipGaji"
+        component={SlipGaji}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="RekapAbsen"
+        component={RekapAbsen}
+        options={{
+          headerShown: false,
+
+        }}
+      />
 
 
 

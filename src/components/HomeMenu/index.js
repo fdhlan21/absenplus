@@ -48,7 +48,7 @@ export default function HomeMenu({navigation}) {
         </TouchableNativeFeedback>
 
      
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate("PengajuanIzin")}>
         <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -72,7 +72,7 @@ export default function HomeMenu({navigation}) {
         </TouchableNativeFeedback>
          
 
-         <TouchableNativeFeedback>
+         <TouchableNativeFeedback onPress={() => navigation.navigate('PengajuanCuti')}>
          <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -98,7 +98,7 @@ export default function HomeMenu({navigation}) {
          </TouchableNativeFeedback>
 
           
-<TouchableNativeFeedback>
+<TouchableNativeFeedback onPress={() => navigation.navigate("Kunjungan")}>
 <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -125,7 +125,7 @@ export default function HomeMenu({navigation}) {
 
 
 
-<TouchableNativeFeedback>
+<TouchableNativeFeedback onPress={() => navigation.navigate("Catatan")}>
 <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -150,7 +150,7 @@ export default function HomeMenu({navigation}) {
 </TouchableNativeFeedback>
 
 
-<TouchableNativeFeedback>
+<TouchableNativeFeedback onPress={() => navigation.navigate("PengajuanReimbursement")}>
 <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -175,7 +175,7 @@ export default function HomeMenu({navigation}) {
 </TouchableNativeFeedback>
 
 
-<TouchableNativeFeedback>
+<TouchableNativeFeedback onPress={() => navigation.navigate("SlipGaji")}>
 <View style={{
           padding:10,
           backgroundColor:colors.secondary,
@@ -199,7 +199,7 @@ export default function HomeMenu({navigation}) {
         </View>
 </TouchableNativeFeedback>
 
-<TouchableNativeFeedback>
+<TouchableNativeFeedback onPress={() => navigation.navigate("RekapAbsen")}>
 <View style={{
           padding:10,
           backgroundColor:colors.secondary,

@@ -37,8 +37,8 @@ export default function MyInput({
       {/* Label dan Icon */}
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {icon && (
-          <View style={{ paddingLeft: 5, bottom:5 }}>
-            <Icon type='ionicon' name={iconname} color={colorIcon} size={20} />
+          <View style={{ paddingLeft: 0, bottom:5 }}>
+            <Icon type='ionicon' name={iconname} color={colorIcon} size={24} />
           </View>
         )}
         <Text
@@ -61,6 +61,8 @@ export default function MyInput({
           alignItems: 'center',
           borderRadius: 5,
           backgroundColor: 'white',
+          borderWidth:1,
+          borderColor: Color.blueGray[300]
         }}
       >
         <TextInput
