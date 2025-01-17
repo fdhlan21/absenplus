@@ -80,6 +80,7 @@ import {
   Catatan,
   SlipGaji,
   RekapAbsen,
+  DetailSlipGaji,
 
 
 
@@ -110,7 +111,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='Catatan'>
+    <Stack.Navigator initialRouteName='MainApp'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -258,6 +259,14 @@ export default function Router() {
 <Stack.Screen
         name="SlipGaji"
         component={SlipGaji}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+<Stack.Screen
+        name="DetailSlipGaji"
+        component={DetailSlipGaji}
         options={{
           headerShown: false,
 

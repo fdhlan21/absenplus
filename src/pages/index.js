@@ -26,7 +26,7 @@ import Kujungan from './Kujungan';
 import Catatan from './Catatan';
 import SlipGaji from './SlipGaji';
 import RekapAbsen from './RekapAbsen';
-
+import DetailSlipGaji from './SlipGaji/detail';
 
 export {
   Splash,
@@ -57,7 +57,7 @@ Kujungan,
 Catatan,
 SlipGaji,
 RekapAbsen,
-
+DetailSlipGaji,
   
 
 };
